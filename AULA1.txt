@@ -1,0 +1,46 @@
+--Primeira consulta
+SELECT *
+FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes`
+LIMIT 5;
+
+--OUTRA CONSULTA
+SELECT flag_tsunami, YEAR 
+FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes`
+LIMIT 5;
+
+--ALIAS
+SELECT terremotos.flag_tsunami, terremotos.Year+1 AS Ano_corrigido
+FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes` terremotos
+LIMIT 5;
+
+--FILTROS
+
+SELECT terremotos.flag_tsunami, terremotos.Year+1 AS Ano_corrigido
+FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes` terremotos
+WHERE flag_tsunami='Tsu'
+LIMIT 5;
+
+SELECT terremotos.flag_tsunami, terremotos.Year+1 AS Ano_corrigido
+FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes` terremotos
+WHERE terremotos.flag_tsunami='Tsu' AND ((terremotos.Year+1) > 2000 OR (terremotos.Year+1) < 1990)
+LIMIT 5;
+
+--SUBQUERY
+
+SELECT * FROM (SELECT terremotos.flag_tsunami, terremotos.Year+1 AS Ano_corrigido, eq_primary
+FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes` terremotos)
+WHERE flag_tsunami='Tsu' AND ((Ano_corrigido) > 2000 OR Ano_corrigido < 1990)
+LIMIT 5;
+
+WITH anos_interessantes AS (SELECT terremotos.flag_tsunami, terremotos.Year+1 AS Ano_corrigido
+FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes` terremotos)
+SELECT * FROM anos_interessantes WHERE flag_tsunami='Tsu' AND ((Ano_corrigido) > 2000 OR Ano_corrigido < 1990)
+LIMIT 5;
+
+--ORDER
+
+SELECT terremotos.flag_tsunami, terremotos.Year+1 AS Ano_corrigido, eq_primary
+FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes` terremotos
+WHERE eq_primary > 0
+ORDER BY EQ_PRIMARY
+LIMIT 5;
