@@ -1,0 +1,64 @@
+--GROUP BY
+SELECT country, AVG(eq_primary) AS media_magnitude, MAX(EQ_PRIMARY) AS maxima_magnitude
+FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes` terremotos
+GROUP BY country
+ORDER BY MEDIA_MAGNITUDE;
+
+--COUNT
+SELECT Count(*) flag_tsunami, country
+FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes` terremotos
+GROUP BY country
+LIMIT 5;
+
+--HAVING
+SELECT country, AVG(eq_primary) AS media_magnitude, MAX(EQ_PRIMARY) AS maxima_magnitude
+FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes` terremotos
+GROUP BY country
+HAVING media_magnitude IS NOT NULL
+ORDER BY MEDIA_MAGNITUDE;
+
+--DISTINCT
+SELECT DISTINCT country
+FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes` terremotos;
+
+--ARRAY
+SELECT country, ARRAY_AGG(year ORDER BY year), ARRAY_AGG(eventos ORDER BY year) FROM
+(SELECT country, YEAR, COUNT(1) AS eventos
+FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes`
+WHERE eq_primary IS NOT NULL
+GROUP BY country, YEAR)
+GROUP BY country
+ORDER BY country;
+
+--STRUCT
+SELECT[
+STRUCT('Japan' AS country, [30,45] AS eventos),
+STRUCT('Brazil' AS country, [1,1] AS eventos)
+] AS eventos_no_mundo;
+
+SELECT ARRAY_LENGTH(eventos_no_mundo), eventos_no_mundo[OFFSET(0)] FROM (SELECT[
+STRUCT('Japan' AS country, [30,45] AS eventos),
+STRUCT('Brazil' AS country, [1,1] AS eventos)
+] AS eventos_no_mundo);
+
+SELECT * FROM UNNEST ([
+STRUCT('Japan' AS country, [30,45] AS eventos),
+STRUCT('Brazil' AS country, [1,1] AS eventos)
+]);
+
+--Desafio pegar o primeiro elemento do array do Japão
+
+--Joins
+
+WITH TABELA1 AS
+(SELECT 'JAPAN' AS COUNTRY, 45 AS EVENTOS
+UNION ALL SELECT 'EUA' AS COUNTRY, 30 AS EVENTOS
+UNION ALL SELECT 'BRAZIL' AS COUNTRY, 1 AS EVENTOS),
+TABELA2 AS
+(SELECT 'JAPAN' AS COUNTRY, 'TOKYO' AS CITY
+UNION ALL SELECT 'EUA' AS COUNTRY, 'OKLAHOMA' AS CITY
+UNION ALL SELECT 'ITALY' AS COUNTRY, 'FLORENCE' AS CITY)
+SELECT TABELA1.*, CITY
+FROM TABELA1
+JOIN TABELA2 -- INNER JOIN; CROSS JOIN; FULL OUTER JOIN; LEFT JOIN; RIGHT JOIN;
+ON TABELA1.COUNTRY = TABELA2.COUNTRY;
