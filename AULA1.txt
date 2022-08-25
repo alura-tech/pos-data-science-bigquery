@@ -27,7 +27,7 @@ LIMIT 5;
 
 --SUBQUERY
 
-SELECT * FROM (SELECT terremotos.flag_tsunami, terremotos.Year+1 AS Ano_corrigido, eq_primary
+SELECT * FROM (SELECT terremotos.flag_tsunami, terremotos.Year+1 AS Ano_corrigido
 FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes` terremotos)
 WHERE flag_tsunami='Tsu' AND ((Ano_corrigido) > 2000 OR Ano_corrigido < 1990)
 LIMIT 5;
