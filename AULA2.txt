@@ -13,8 +13,9 @@ LIMIT 5;
 --HAVING
 SELECT country, AVG(eq_primary) AS media_magnitude, MAX(EQ_PRIMARY) AS maxima_magnitude
 FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes` terremotos
+--WHERE AVG(eq_primary) IS NOT NULL
 GROUP BY country
-HAVING media_magnitude IS NOT NULL
+--HAVING media_magnitude IS NOT NULL
 ORDER BY MEDIA_MAGNITUDE;
 
 --DISTINCT
