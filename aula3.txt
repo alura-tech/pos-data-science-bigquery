@@ -1,0 +1,8 @@
+SELECT *
+FROM `bigquery-public-data.noaa_significant_earthquakes.earthquakes`
+
+
+Vídeo 3.2
+
+SELECT *
+FROM `terremotos_brasil.centro_sismo`
