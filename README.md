@@ -16,4 +16,4 @@ Os dados de eventos sísmicos foram coletados no site do Centro de Sismologia da
 
 
 Vamos aprender a lidar com esses terremotos!!! 
-<p align="left"><img src='https://media.giphy.com/media/mbG6891BV7QMo/giphy-downsized-large.gif'</p>
+<p align="left"><img src='https://media.giphy.com/media/mbG6891BV7QMo/giphy-downsized.gif'</p>
