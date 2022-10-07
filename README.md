@@ -15,5 +15,5 @@
 Os dados de eventos sísmicos foram coletados no site do Centro de Sismologia da USP: https://www.sismo.iag.usp.br/ e estão sendo disponibilizados neste link do repositório: https://github.com/alura-tech/pos-data-science-bigquery/blob/dados/queryterremotos_virgula.csv
 
 
-Vamos lá!!! 
-<p align="left"><img src=https://media.giphy.com/media/3o7bubiK9vDtxXCOgU/giphy.gif'</p>
+Vamos aprender a lidar com esses terremotos!!! 
+<iframe src="https://giphy.com/embed/mbG6891BV7QMo" width="336" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/mbG6891BV7QMo">via GIPHY</a></p>
